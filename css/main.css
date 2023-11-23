@@ -1,0 +1,167 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ocultar scroll bar*/
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+
+main {
+    height: 100vh;
+    overflow-y: scroll;   
+}
+
+
+/*boton whatsapp*/
+.logowa {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    line-height: 50px;
+}
+
+.logowa img {
+    width: 100%;
+    height: auto;
+}
+
+/*boton IG*/
+.logoig {
+    position: fixed;
+    bottom: 70px;
+    right: 15px;
+    height: 60px;
+    width: 60px;
+    border-radius: 15%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoig img {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+ #section-1{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../assets/img/FONDO.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+#section-2{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background: rgb(196,191,187);
+    background: linear-gradient(90deg, rgba(196,191,187,1) 0%, rgba(228,220,209,1) 70%);   
+    margin:0;
+    flex-wrap: wrap; /* Permitir que los productos se envuelvan en filas */
+    justify-content: space-around; /* Distribuir los productos en la sección */
+    align-items: flex-start; /* Alinear los productos hacia arriba */
+    overflow-y: auto; /* Habilitar scroll si hay demasiados productos */
+    align-items: center; /* Centra los elementos horizontalmente */
+    padding: 20px;
+}
+
+.LOGO{
+    width: 400px;
+}
+
+
+.container{
+    margin-bottom:15px;
+}
+
+.hero{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    margin: 25px;
+}
+
+/* Estilos para la carta del producto */
+
+.producto {
+    display: flex;
+    width: 100%; 
+    padding: 10px;
+    margin-bottom: 20px; 
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.imagenProducto {
+    flex: 0 30%;
+}
+
+.imagenProducto img {
+    width: 100%;
+}
+
+.infoProducto {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+}
+
+
+.descripcion-precio{
+    flex: 1; /* Toma el espacio restante */
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Establece un espacio vertical más pequeño */
+}
+
+.nombreProducto {
+    font-weight: bold;
+    font-size: 2em; 
+}
+
+.descripcionProducto {
+    color: rgb(78, 78, 78);
+    font-size: 1.5em;
+}
+
+.botonCompra {
+    height: auto;
+    width: 150px;
+    background-color: brown;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+
+@media (max-width: 475px) { 
+    
+}
