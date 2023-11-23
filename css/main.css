@@ -33,6 +33,7 @@ main {
     overflow: hidden;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
     line-height: 50px;
+    z-index: 1000;
 }
 
 .logowa img {
@@ -52,6 +53,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 
 .logoig img {
