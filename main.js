@@ -157,9 +157,6 @@ DOMtotal.innerText = calcularTotal();
 }
 
 
-
-
-
 function filtrarProductos() {
 const Productos = Array.from(document.querySelectorAll('#items .card .card-body .card-title'));
 Productos.forEach(producto => {
