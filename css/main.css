@@ -112,20 +112,29 @@ main {
 
 .producto {
     display: flex;
-    width: 100%; 
+    flex-direction: row;
     padding: 10px;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
     border: 1px solid #ccc;
     background-color: #fff;
-    opacity: 0;/* Anima hacia la izquierda */
-    transform: translateX(50px); 
+    opacity: 0;
+    transform: translateX(-50px);
     transition: opacity 3s ease, transform 3s ease;
   }
 
-  
+.producto:nth-child(odd) {
+    order: 1; /* Cambia el orden de los productos impares */
+    transform: translateX(50px); /* Mueve los productos impares hacia la derecha */
+    flex-direction: row-reverse;
+}
+
+.producto:nth-child(odd) .producto-contenedor {
+    flex-direction: row-reverse;
+  }
+
 .producto.visible {
     opacity: 1;
-    transform: translateX(0); /* Anima hacia la izquierda */
+    transform: translateX(0);
 }
 
 
@@ -219,6 +228,8 @@ main {
     display: flex;
     flex-direction: column;
     padding: 10px;
+    flex: 0 0 100%;
+    max-width: 100%;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     background-color: #fff;
