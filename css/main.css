@@ -83,12 +83,9 @@ main {
     background: rgb(196,191,187);
     background: linear-gradient(90deg, rgba(196,191,187,1) 0%, rgba(228,220,209,1) 70%);   
     margin:0;
-    flex-wrap: wrap; /* Permitir que los productos se envuelvan en filas */
-    justify-content: space-around; /* Distribuir los productos en la sección */
-    align-items: flex-start; /* Alinear los productos hacia arriba */
-    overflow-y: auto; /* Habilitar scroll si hay demasiados productos */
-    align-items: center; /* Centra los elementos horizontalmente */
     padding: 20px;
+    justify-content: space-around; /* Distribuir los productos en la sección */
+    overflow-y: auto; /* Habilitar scroll si hay demasiados productos */
 }
 
 .LOGO{
@@ -112,48 +109,50 @@ main {
 
 .producto {
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
     padding: 10px;
     margin-bottom: 20px;
+    margin-left: 60px;
     border: 1px solid #ccc;
     background-color: #fff;
     opacity: 0;
     transform: translateX(-50px);
     transition: opacity 3s ease, transform 3s ease;
-  }
 
+  }
+  
+  /* Establece los productos impares a la derecha */
 .producto:nth-child(odd) {
-    order: 1; /* Cambia el orden de los productos impares */
-    transform: translateX(50px); /* Mueve los productos impares hacia la derecha */
     flex-direction: row-reverse;
-}
-
-.producto:nth-child(odd) .producto-contenedor {
-    flex-direction: row-reverse;
+    margin-left: 0px;
+    margin-right: 60px;
+    transform: translateX(50px);
   }
-
-.producto.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
 
 .imagenProducto {
-    flex: 0 30%;
-}
-
-.imagenProducto img {
-    width: 100%;
-}
-
+    flex: 0 0 30%;
+  }
+  
 .infoProducto {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 10px;
+    gap: 5px;
+    padding: 10px; /* Espaciado alrededor del texto e información */
+  }
+  
+.imagenProducto img {
+    max-width: 100%;
+    height: auto;
+    max-height: 800px; /* Aquí puedes ajustar la altura máxima */
 }
-
+  
+.producto.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
 
 .descripcion-precio{
     flex: 1; /* Toma el espacio restante */
@@ -217,57 +216,68 @@ main {
 
 
  /* Estilos para pantallas menores o iguales a 790px */
-@media (max-width: 790px) {
-        /* Logo principal más pequeño */
-        .LOGO {
-          width: 300px; /* Tamaño reducido */
-        }
-      
-        /* Mostrar productos en columnas */
-        .producto {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    flex: 0 0 100%;
-    max-width: 100%;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 3s ease, transform 3s ease;
-}
-
-.producto.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.imagenProducto {
-    width: 100%;
-}
-
-.imagenProducto img {
-    width: 100%;
-    height: auto;
-}
-
-.infoProducto {
-    padding: 10px 0;
-}
-
-.descripcion-precio {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.botonCompra {
-    width: 100%;
-    background-color: brown;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-}
+ @media (max-width: 790px) {
+    /* Logo principal más pequeño */
+    .LOGO {
+        width: 300px; /* Tamaño reducido */
     }
+    
+    /* Mostrar productos en columnas */
+    .producto {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 3s ease, transform 3s ease;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .producto:nth-child(odd) {
+        flex-direction: column;
+        margin-left: 0px;
+        margin-right: 0px;
+        transform: translateX(50px);
+       
+    }
+
+
+    .imagenProducto img {
+        width: 100%;
+    }
+
+    .producto.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .imagenProducto {
+        width: 100%;
+    }
+
+
+    .infoProducto {
+        padding: 10px 0;
+    }
+
+    .descripcion-precio {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .botonCompra {
+        width: 100%;
+        background-color: brown;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+    }
+}
