@@ -6,7 +6,7 @@ const DOMcarrito = document.getElementById('carrito');
 const DOMtotal = document.getElementById('total');
 const DOMbotonVaciar = document.getElementById('boton-vaciar');
 const DOMinputBuscador = document.getElementById('buscar-pal');
-const DOMbotonCompra = document.getElementById('boton-compra');
+const DOMbotonPrecio = document.getElementById('boton-Precio');
 const DOMmostrarCarrito = document.getElementById('mostrar-carrito');
 
 
@@ -113,16 +113,22 @@ function renderizarProductos() {
         miNodoDescripcion.classList.add('descripcionProducto'); // Agregar la clase aquí
         miNodoDescripcion.textContent = info.descripcion;;
 
+        /*
         const miNodoPrecio = document.createElement('p');
-        miNodoPrecio.textContent = `$${info.moneda}`;
+        miNodoPrecio.textContent = `$${info.moneda}`;*/
 
         const miNodoBoton = document.createElement('button');
-        miNodoBoton.classList.add('botonCompra');
-        miNodoBoton.textContent = 'Comprar';
+        miNodoBoton.classList.add('botonPrecio');
+        miNodoBoton.textContent = 'Consultar precio';
+        miNodoBoton.addEventListener('click', () => {
+            const mensaje = `Hola Jaguar Overo, me gustaria saber el precio ${info.nombre}`;
+            const url = `https://api.whatsapp.com/send?phone=5491157493973&text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+        });
 
         miNodoInfo.appendChild(miNodoNombre);
         miNodoInfo.appendChild(miNodoDescripcion);
-        miNodoInfo.appendChild(miNodoPrecio);
+        //miNodoInfo.appendChild(miNodoPrecio);
         miNodoInfo.appendChild(miNodoBoton);
 
         miNodo.appendChild(miNodoImagen);
@@ -162,7 +168,10 @@ const observer = new IntersectionObserver(entries => {
 */
 
 
-/**Evento para añadir un producto al carrito de la compra*/
+/**Evento para añadir un producto al carrito de la Precio*/
+
+/*BORRAR PARA SACAR
+
 function anyadirProductoAlCarrito(e) {
 // Anyadimos el Nodo a nuestro carrito
 carrito.push(e.target.getAttribute('marcador'))
@@ -179,6 +188,9 @@ $.jGrowl("¡Agregado al carrito!", {
 /**
 * Dibuja todos los productos guardados en el carrito
 */
+
+/*BORRAR PARA SACAR
+
 function renderizarCarrito() {
 // Vaciamos todo el html
 DOMcarrito.innerText = '';
@@ -215,11 +227,12 @@ carritoSinDuplicados.forEach((item) => {
 DOMtotal.innerText = calcularTotal();
 }
 
+BORRAR PARA SACAR*/
 
 // Eventos
 DOMbotonVaciar.addEventListener('click', vaciarCarrito);
 DOMinputBuscador.addEventListener('keyup', filtrarProductos);
-DOMbotonCompra.addEventListener('click', alertaCompra);
+DOMbotonPrecio.addEventListener('click', alertaPrecio);
 DOMmostrarCarrito.addEventListener('click', mostrarCarrito);
 
 
