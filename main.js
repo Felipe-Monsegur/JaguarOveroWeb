@@ -1,8 +1,21 @@
+
+//let baseDeDatos = [];
+
+let carrito = [];
+const DOMcarrito = document.getElementById('carrito');
+const DOMtotal = document.getElementById('total');
+const DOMbotonVaciar = document.getElementById('boton-vaciar');
+const DOMinputBuscador = document.getElementById('buscar-pal');
+const DOMbotonCompra = document.getElementById('boton-compra');
+const DOMmostrarCarrito = document.getElementById('mostrar-carrito');
+
+
+
 const arayproductos = [{
     nombre: 'Banco dos cuerpos "Capataz"',
     img: "./assets/img/banco dos cuerpos.jpg",
     alt: "banco",
-    descripcion: "Asiento 1.00 x 0.40 / Respaldo 0.50 / Altura Final 0.90",
+    descripcion: "Asiento 1.00 x 0.40 | Respaldo 0.50 | Altura Final 0.90",
     moneda: 0,
     id: 1,
 },
@@ -11,7 +24,7 @@ const arayproductos = [{
     nombre: 'Silla matera “Lion”',
     img: "./assets/img/Silla matera.jpg",
     alt: "silla",
-    descripcion: "Largo 0.35 / Ancho 0.35 /Altura 0.65",
+    descripcion: "Largo 0.35 | Ancho 0.35 | Altura 0.65",
     moneda: 0,
     id: 2,
 },
@@ -19,7 +32,7 @@ const arayproductos = [{
     nombre: 'Silla “Indio”',
     img: "./assets/img/Silla.jpg",
     alt: "silla",
-    descripcion: "Largo 0.30 / Ancho 0.65 /Altura 0.90",
+    descripcion: "Largo 0.30 | Ancho 0.65 | Altura 0.90",
     moneda: 0,
     id: 3,
 },
@@ -27,7 +40,7 @@ const arayproductos = [{
     nombre: 'Banco matero “Pionada”',
     img: "./assets/img/Banco matero.jpg",
     alt: "banco",
-    descripcion: "Largo 0.40 / Ancho 0.40 /Altura 0.45",
+    descripcion: "Largo 0.40 | Ancho 0.40 | Altura 0.45",
     moneda: 0,
     id: 4,
 },
@@ -35,7 +48,7 @@ const arayproductos = [{
     nombre: 'Mesa ratona “Rastra de oro”',
     img: "./assets/img/Mesa ratona.jpg",
     alt: "mesa",
-    descripcion: "Largo 1.10/ Ancho 0.50 / Altura 0.45",
+    descripcion: "Largo 1.10 | Ancho 0.50 | Altura 0.45",
     moneda: 0,
     id: 5,
 }
@@ -44,10 +57,37 @@ const arayproductos = [{
 
 const DOMitems = document.getElementById('items');
 
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); // Para que la animación se aplique solo una vez
+        }
+    });
+});
 
-/**
-* Dibuja todos los productos a partir de la base de datos.
-*/
+
+
+function filtrarProductos() {
+    const Productos = Array.from(document.querySelectorAll('#items .producto .infoProducto .nombreProducto'));
+    Productos.forEach(producto => {
+        let productoNode = producto.parentElement.parentElement;
+        if (producto.innerText.toLowerCase().includes(DOMinputBuscador.value.toLowerCase())) {
+            productoNode.style.display = "flex";
+            setTimeout(() => {
+                observer.observe(productoNode); // Observar el producto cuando coincide con la búsqueda
+            }, 100); // Añade un pequeño retraso para que la animación se vea bien
+        } else {
+            productoNode.classList.remove('visible');
+            setTimeout(() => {
+                productoNode.style.display = 'none';
+            }, 500); // Espera el tiempo de la animación antes de ocultar el elemento
+        }
+    });
+}
+
+
+/**Dibuja todos los productos a partir de la base de datos*/
 function renderizarProductos() {
     const DOMitems = document.getElementById('items');
     DOMitems.innerHTML = '';
@@ -63,10 +103,10 @@ function renderizarProductos() {
         miNodoImagen.appendChild(imagen);
 
         const miNodoInfo = document.createElement('div');
-        miNodoInfo.classList.add('infoProducto');
+        miNodoInfo.classList.add('infoProducto', 'card-body'); // Asegúrate de incluir 'card-body' si es necesario
 
         const miNodoNombre = document.createElement('p');
-        miNodoNombre.classList.add('nombreProducto'); // Agregar la clase aquí
+        miNodoNombre.classList.add('nombreProducto', 'card-title'); // Agregar la clase 'card-title'
         miNodoNombre.textContent = info.nombre;
 
         const miNodoDescripcion = document.createElement('p');
@@ -89,21 +129,40 @@ function renderizarProductos() {
         miNodo.appendChild(miNodoInfo);
 
         DOMitems.appendChild(miNodo);
+
+        // Añade la clase 'visible' después de un pequeño retraso para la animación
+        setTimeout(() => observer.observe(miNodo), 100)
     });
 }
+
 document.addEventListener('DOMContentLoaded', () => {
     renderizarProductos();
+    DOMinputBuscador.addEventListener('keyup', filtrarProductos);
 });
 
 
-// Llama a la función para mostrar los productos al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
+/* animacion*/
+/*
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target); // Para que la animación se aplique solo una vez
+      }
+    });
+  });
+  
+  document.addEventListener('DOMContentLoaded', () => {
     renderizarProductos();
+    const productos = document.querySelectorAll('.producto');
+    productos.forEach(producto => {
+        observer.observe(producto);
+    });
 });
-
-/**
-* Evento para añadir un producto al carrito de la compra
 */
+
+
+/**Evento para añadir un producto al carrito de la compra*/
 function anyadirProductoAlCarrito(e) {
 // Anyadimos el Nodo a nuestro carrito
 carrito.push(e.target.getAttribute('marcador'))
@@ -155,44 +214,6 @@ carritoSinDuplicados.forEach((item) => {
 // Renderizamos el precio total en el HTML
 DOMtotal.innerText = calcularTotal();
 }
-
-
-function filtrarProductos() {
-const Productos = Array.from(document.querySelectorAll('#items .card .card-body .card-title'));
-Productos.forEach(producto => {
-    let productoStyle = producto.parentElement.parentElement.style;
-    if (producto.innerText.toLowerCase().includes(DOMinputBuscador.value.toLowerCase()) || DOMinputBuscador.value == '') {
-        productoStyle.display = "initial";
-        setTimeout(() => {
-            productoStyle.transform = 'scale(100%)'
-        }, 300)
-
-    } else {
-        productoStyle.transform = 'scale(0%)';
-        setTimeout(() => {
-            productoStyle.display = 'none'
-        }, 300)
-    }
-})
-}
-
-/* animacion
-*/
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target); // Para que la animación se aplique solo una vez
-      }
-    });
-  });
-  
-  document.addEventListener('DOMContentLoaded', () => {
-    const productos = document.querySelectorAll('.producto');
-    productos.forEach(producto => {
-      observer.observe(producto);
-    });
-  });
 
 
 // Eventos
