@@ -1,0 +1,71 @@
+#productos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    padding: 10px;
+  }
+  
+  .producto-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .producto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  .producto-card img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+  }
+  
+  .producto-nombre {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 10px;
+    color: #2e2e2e;
+  }
+  
+  .producto-descripcion {
+    font-size: 1em;
+    color: #5e5e5e;
+    margin: 0 10px 10px;
+    flex-grow: 1;
+  }
+  
+  .producto-footer {
+    display: flex;
+    justify-content: center; /* Centrar los elementos horizontalmente */
+    align-items: center;     /* Centrar los elementos verticalmente */
+    padding: 12px;
+    border-top: 1px solid #ddd;
+    gap: 0px; /* 10 px Espacio entre el precio y el botón */
+  }
+  
+  .producto-precio {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #333;
+  }
+  
+  .botonPrecio {
+    background-color: brown;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .botonPrecio:hover {
+    background-color: #5a2d2d;
+  }
+  
